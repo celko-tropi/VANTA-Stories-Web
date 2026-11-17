@@ -1,0 +1,12 @@
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,getRedirectResult,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+const firebaseConfig={apiKey:"AIzaSyCSvYT5uCkoWQguu5wkfSjzOhbBKCiQklw",authDomain:"vanta-stories.firebaseapp.com",projectId:"vanta-stories",storageBucket:"vanta-stories.firebasestorage.app",messagingSenderId:"34849002748",appId:"1:34849002748:web:a30b57b772b8da52c67379"};
+const auth=getAuth(initializeApp(firebaseConfig));
+const provider=new GoogleAuthProvider();
+provider.setCustomParameters({prompt:'select_account'});
+const message=(text)=>{const el=document.getElementById('vantaAuthMessage');if(el)el.textContent=text};
+const update=(user)=>{const info=document.getElementById('vantaAuthIdentity'),login=document.getElementById('vantaGoogleLogin'),logout=document.getElementById('vantaGoogleLogout');if(info)info.textContent=user?'Prijavljen: '+(user.email||user.displayName||'Google račun'):'Nisi prijavljen.';if(login)login.hidden=!!user;if(logout)logout.hidden=!user;window.vantaCurrentUser=user||null};
+onAuthStateChanged(auth,update,(err)=>message('Napaka pri preverjanju prijave: '+err.message));
+window.vantaGoogleSignIn=async()=>{message('Odpiram Google prijavo …');try{await signInWithPopup(auth,provider);message('Prijava je uspela.')}catch(err){if(err.code==='auth/popup-blocked'){message('Preusmerjam na Google prijavo …');await signInWithRedirect(auth,provider);return}if(err.code==='auth/popup-closed-by-user'){message('Prijava je bila preklicana.');return}message('Google prijava ni uspela ('+(err.code||'napaka')+'). Preveri dovoljene domene in nastavitve Google Authentication.')}};
+window.vantaGoogleSignOut=async()=>{try{await signOut(auth);message('Odjavljen.')}catch(err){message('Odjava ni uspela: '+err.message)}};
+getRedirectResult(auth).then(result=>{if(result)message('Prijava je uspela.')}).catch(err=>message('Google prijava ni uspela ('+(err.code||'napaka')+').'));
