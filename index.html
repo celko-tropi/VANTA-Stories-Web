@@ -125,19 +125,23 @@ function loadCaptions(){const v=$('video');v.querySelectorAll('track').forEach(t
 const VANTA_TRAILER_PATHS={lumi:'https://celko-tropi.github.io/VANTA-Stories-Web/www/videos/lumi_FINAL_VANTA%20%281%29.mp4',resevalci:'https://celko-tropi.github.io/VANTA-Stories-Web/www/videos/brinov_vrh_FINAL_VANTA%20%281%29.mp4',pozar:'https://celko-tropi.github.io/VANTA-Stories-Web/www/videos/POZAR_VANTA_popravljen_refren_111-134.mp4'};
 function playSeriesTrailer(){
  const src=VANTA_TRAILER_PATHS[current];if(!src)return;
- clearMedia();const video=$('video');video.onerror=null;
+ clearMedia();
+ const video=$('video'),player=$('player'),placeholder=$('noVideo');
+ video.onerror=null;video.onloadedmetadata=null;
  $('playerEpisode').textContent=(series.find(s=>s.id===current)?.title||'VANTA')+' · NAPOVEDNIK';
- $('player').classList.add('open');document.body.style.overflow='hidden';
- $('subtitle').classList.add('hidden');$('noVideo').classList.add('hidden');video.classList.remove('hidden');
- video.controls=true;video.playsInline=true;video.preload='auto';
- const fallback=src.replace('https://celko-tropi.github.io/VANTA-Stories-Web/','https://raw.githubusercontent.com/celko-tropi/VANTA-Stories-Web/main/');
- let triedFallback=false;
+ player.classList.add('open');document.body.style.overflow='hidden';
+ $('subtitle').classList.add('hidden');placeholder.classList.add('hidden');video.classList.remove('hidden');
+ video.controls=true;video.playsInline=true;video.preload='metadata';
+ // The direct GitHub Pages MP4 is the confirmed working URL. Never replace it with raw.githubusercontent.com.
  video.onerror=()=>{
-  if(!triedFallback){triedFallback=true;video.src=fallback;video.load();video.play().catch(()=>{});return;}
-  video.classList.add('hidden');$('noVideo').classList.remove('hidden');
-  $('noVideo').querySelector('p').textContent='Napovednika ni mogoče naložiti. Preverite internetno povezavo ali datoteko na GitHubu.';
+  video.classList.add('hidden');placeholder.classList.remove('hidden');
+  const p=placeholder.querySelector('p');p.textContent='';
+  const a=document.createElement('a');a.href=src;a.target='_blank';a.rel='noopener noreferrer';a.textContent='▶ Odpri napovednik neposredno';
+  a.style.cssText='color:#fff;background:#a34df1;padding:12px 18px;border-radius:10px;display:inline-block;text-decoration:none;margin-top:12px';p.appendChild(a);
  };
- video.src=src;video.load();video.play().catch(()=>{video.controls=true;});
+ video.src=src;video.load();
+ // Android browsers may block autoplay with sound; native controls remain available.
+ const attempt=video.play();if(attempt&&attempt.catch)attempt.catch(()=>{video.controls=true;});
 }
 // VANTA ORIGINAL trailer: bundled local MP4, separate from paid episodes.
 function playTrailer(){
