@@ -4,7 +4,7 @@
 Format: načrtovana 1. sezona, 30 × približno 2 minuti. Epizode še niso posnete.
 
 ## Zasnova
-Na robu slovenske vasi odraščata Nika in Luka. Skupaj preživljata poletja s konjema: kostanjevo kobilo Zaro in sivim kastratom Vetrom. Prva ljubezen je tiha, iskrena in neločljivo povezana z njunima štirinožnima prijateljema.
+Na robu slovenske vasi odraščata Nika in Luka. Skupaj preživljata poletja s konjema: črno-belo baročno pinto kobilo Zaro z dolgo, bujno grivo in kostanjevo-belega paint kastrata Vetra. Prva ljubezen je tiha, iskrena in neločljivo povezana z njunima štirinožnima prijateljema.
 
 Ko Nika odide na šolanje v mesto in Luka na drugo šolo, se med njima začnejo nabirati neodgovorjena sporočila, nesporazumi in razdalja. Starejši lastnik konj zaradi bolezni ne more več skrbeti zanju, zato ju proda trmastemu kmetu Francu, ki v njiju vidi predvsem delovno vrednost. Nika in Luka za prodajo izvesta prepozno.
 
@@ -26,3 +26,8 @@ Zadnji prizor: Nika in Luka se držita za roke ob ograji; Zara in Veter mirno pa
 16–20: Nikina vrnitev, nočni prihod konj in klic Luki.
 21–25: Ponovno srečanje, zdravljenje konj, Francova zahteva in odkritje starega nesporazuma.
 26–30: Pogajanja, sprava, nova ljubezen, zatočišče in skupen dom.
+
+## Vizualna kontinuiteta konj
+- Zara: izrazita črno-bela baroque pinto kobila, dolga valovita griva, bujen rep, elegantna baročna postava.
+- Veter: kostanjevo-bel American Paint Horse kastrat, izrazite bele lise, atletska postava, svetla griva.
+- Barve, vzorci in spol konj ostanejo enaki v vseh epizodah in na naslovnicah.
