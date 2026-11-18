@@ -1,4 +1,4 @@
-const CACHE='vanta-pwa-20261118-nav-hotfix-v4';
+const CACHE='vanta-pwa-20261118-emergency-rollback-v5';
 const CORE=['./','./index.html','./manifest.json','./www/Icon/vanta-192.png','./www/Icon/vanta-512.png','./www/images/last-signature-cover.jpg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('vanta-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
